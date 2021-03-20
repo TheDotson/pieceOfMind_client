@@ -1,0 +1,15 @@
+.Navbar {
+  background: $cream;
+}
+
+.nav-link {
+  color: $gray;
+
+  &:hover {
+    color: $highlight !important;
+  }
+}
+
+.navbar-brand {
+  font-family: 'Satisfy', cursive;
+}
