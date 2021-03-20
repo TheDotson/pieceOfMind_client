@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import Button from 'react-bootstrap/Button';
 
 export const Login = props => {
   const [user, setUser] = useState({
@@ -16,7 +15,7 @@ export const Login = props => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    return fetch("http://127.0.0.1:8000/login", {
+    return fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +30,7 @@ export const Login = props => {
       .then(res => {
         if ("valid" in res && res.valid && "token" in res) {
           localStorage.setItem("token", res.token)
-          localStorage.setItem("user_id", res.user_id)
+          localStorage.setItem("user_id", res.id)
           props.history.push("/home")
         }
         else {
@@ -41,11 +40,11 @@ export const Login = props => {
   }
 
   return (
-    <div className="login__container">
-      <div className="heading__container">
-        <h1 className="heading__primary">Piece of Mind</h1>
+    <div className="loginContainer">
+      <div className="headingContainer">
+        <h1 className="headingPrimary">Piece of Mind</h1>
       </div>
-      <div className="login__form">
+      <div className="loginForm">
         <form className="form" autoComplete="off">
           <div className="form__group">
             <input id="email" type="email" className="form__input" placeholder="Email Address" onChange={handleControlledInputChange} required></input>
@@ -55,9 +54,13 @@ export const Login = props => {
             <input id="password" type="password" className="form__input" placeholder="Password" onChange={handleControlledInputChange} required></input>
             <label htmlFor="password" className="form__label">Password</label>
           </div>
+          <div className="form-group">
           <Link to="#" onClick={handleLogin} buttonvariant="link" id="btn-text2">Login</Link>
+          </div>
+          <div className="form-group">
+          <Link className="registerLink" to="/register" buttonvariant="link" id="btn-text2">Not a member yet?</Link>
+          </div>
         </form>
-        <Link className="login__link" to="/register" >Not a member yet?</Link>
       </div>
     </div>
   )

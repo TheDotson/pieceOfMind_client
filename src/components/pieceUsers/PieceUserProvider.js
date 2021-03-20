@@ -27,7 +27,7 @@ const PieceUserProvider = (props) => {
   };
 
   const registerPieceUser = pieceUser => {
-    return fetch('http://localhost:8000/pieceUsers', {
+    return fetch('http://localhost:8000/register_pieceUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,5 +1,3 @@
-/* eslint-disable arrow-parens */
-/* eslint-disable arrow-body-style */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { ApplicationViews } from './ApplicationViews';
@@ -9,7 +7,7 @@ import { Register } from './auth/Register';
 export const PieceOfMind = () => (
     <>
         <Route render={() => {
-          if (localStorage.getItem('s_token')) {
+          if (localStorage.getItem('token')) {
             return <>
                     {/* <Route component={NavBar} /> */}
                     <Route render={props => <ApplicationViews {...props} />} />
