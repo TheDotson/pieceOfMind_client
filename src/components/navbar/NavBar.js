@@ -5,7 +5,7 @@ export const NavBar = props => {
     const user_id = localStorage.getItem("user_id")
 
     return (
-        <Navbar fixed="top" className="Navbar" expand="lg">
+        <Navbar  className="Navbar" expand="lg">
             <Navbar.Brand className="navbar-brand" href="/">Piece of Mind</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
