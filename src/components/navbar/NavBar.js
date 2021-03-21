@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, Nav, Button } from "react-bootstrap"
+import { Navbar, Nav } from "react-bootstrap"
 
 export const NavBar = props => {
     const user_id = localStorage.getItem("user_id")
