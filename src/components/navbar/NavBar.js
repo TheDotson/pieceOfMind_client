@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar, Nav } from "react-bootstrap"
 
 export const NavBar = props => {
-    const user_id = localStorage.getItem("user_id")
+    const userId = localStorage.getItem("user_id")
 
     return (
         <Navbar  className="Navbar" expand="lg">
@@ -12,7 +12,7 @@ export const NavBar = props => {
                 <Nav className="mr-auto">
                         <Nav.Link className="center-link nav-link" href="/collections">Collections</Nav.Link>
                         <Nav.Link className="center-link nav-link" href="/rooms">Rooms</Nav.Link>
-                        <Nav.Link className="center-link nav-link" href={`/pieceUsers/${user_id}`}>My Profile</Nav.Link>
+                        <Nav.Link className="center-link nav-link" href={`/userDetails/${userId}`}>My Profile</Nav.Link>
                 </Nav>
                 <Nav className="ml-auto">
                     { (localStorage.getItem("token") !== null) 
