@@ -9,6 +9,7 @@ import EditRoom from './rooms/EditRoom'
 import Collections from './collections/Collections'
 import EditCollection from './collections/EditCollection'
 import NewCollection from './collections/NewCollection'
+import UserDetails from './pieceUsers/UserDetails'
 
 export const ApplicationViews = () => {
   return <>
@@ -16,16 +17,6 @@ export const ApplicationViews = () => {
           <Redirect to='/home' />
         </Route>
         <Route exact path='/home' render={props => <Home {...props} />} />
-
-        {/* <CollectionProvider>
-        <Route
-          exact
-          path="/collections"
-          render={(props) => {
-            return <CollectionsList {...props} history={props.history} />;
-          }}
-        />
-        </CollectionProvider> */}
         
         <Route path="/rooms" render={() => {
             if (localStorage.getItem("token")) {
@@ -81,6 +72,16 @@ export const ApplicationViews = () => {
             if (localStorage.getItem("token")) {
                 return <>
                     <NewCollection />
+                    </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+        <Route path="/userDetails/:userId" render={() => {
+            if (localStorage.getItem("token")) {
+                return <>
+                    <UserDetails />
                     </>
             } else {
                 return <Redirect to="/login" />

@@ -21,7 +21,7 @@ class NewCollection extends React.Component {
         const newCollection = {
             name: name,
             user: user,
-            items: 1
+            items: [1]
         }
         fetch("http://127.0.0.1:8000/collections", {
             method: "POST",
