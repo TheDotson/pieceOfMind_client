@@ -29,7 +29,7 @@ class Rooms extends React.Component {
         const room = rooms.map ((room) => <Room key={room.id} getAllRooms={this.getAllRooms} room={room}/>)
         return(
             <div className="text-center">
-                <h1 className="text-center mt-3">Tags</h1>
+                <h1 className="text-center mt-3">Rooms</h1>
                 <Link to={newRoom}><i className="fas fa-plus-square"></i> New Room</Link>
                 <div className="room-container">
                     {room}

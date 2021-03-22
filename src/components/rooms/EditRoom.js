@@ -71,7 +71,7 @@ class EditRoom extends React.Component {
               onChange={this.changeNameEvent}
               />
             </div>
-            <button className="btn-warning" onClick={this.editRoom}>Edit Room</button>
+            <button className="btn-warning" onClick={this.editRoom}>Save</button>
           </form>
         </div>
       </div>
