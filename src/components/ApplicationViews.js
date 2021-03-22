@@ -1,11 +1,14 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Home } from './home/Home';
-import { CollectionProvider } from './collections/CollectionProvider'
-import { CollectionsList } from './collections/CollectionsList'
+// import { CollectionProvider } from './collections/CollectionProvider'
+// import { CollectionsList } from './collections/CollectionsList'
 import Rooms from './rooms/Rooms'
 import NewRoom from './rooms/NewRoom'
 import EditRoom from './rooms/EditRoom'
+import Collections from './collections/Collections'
+import EditCollection from './collections/EditCollection'
+import NewCollection from './collections/NewCollection'
 
 export const ApplicationViews = () => {
   return <>
@@ -14,7 +17,7 @@ export const ApplicationViews = () => {
         </Route>
         <Route exact path='/home' render={props => <Home {...props} />} />
 
-        <CollectionProvider>
+        {/* <CollectionProvider>
         <Route
           exact
           path="/collections"
@@ -22,7 +25,7 @@ export const ApplicationViews = () => {
             return <CollectionsList {...props} history={props.history} />;
           }}
         />
-        </CollectionProvider>
+        </CollectionProvider> */}
         
         <Route path="/rooms" render={() => {
             if (localStorage.getItem("token")) {
@@ -44,7 +47,7 @@ export const ApplicationViews = () => {
             }
         }} />
 
-        <Route path="/editRoom" render={() => {
+        <Route path="/editRoom/:roomId" render={() => {
             if (localStorage.getItem("token")) {
                 return <>
                     <EditRoom />
@@ -54,6 +57,35 @@ export const ApplicationViews = () => {
             }
         }} />
         
+        <Route path="/collections" render={() => {
+            if (localStorage.getItem("token")) {
+                return <>
+                    <Collections />
+                    </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+        <Route path="/editCollection/:collectionId" render={() => {
+            if (localStorage.getItem("token")) {
+                return <>
+                    <EditCollection />
+                    </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+        <Route path="/newCollection" render={() => {
+            if (localStorage.getItem("token")) {
+                return <>
+                    <NewCollection />
+                    </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
 
         </>;
 };
