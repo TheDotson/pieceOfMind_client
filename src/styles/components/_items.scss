@@ -1,0 +1,34 @@
+.card {
+  width: 18rem;
+  margin: 5px;
+  box-shadow: 3px 3px black;
+  background-color: #F6D342;
+  color: black;
+  img {
+    width: 100%;
+    height: 300px;
+    object-fit: fill;
+  }
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-title {
+  text-decoration: underline;
+  margin-bottom: 0rem;
+}
+
+.collection {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.card-img-top {
+  height: 30vw;
+  object-fit: contain;
+}

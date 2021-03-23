@@ -16,7 +16,7 @@ class Room extends React.Component {
 
   render() {
     const { room } = this.props;
-    const roomItems = `/rooms/${room.id}`
+    const roomItems = `/roomItems/${room.id}`
     const editRoom = `/editRoom/${room.id}`
     return (
       <div className="d-flex justify-content-center room-list">

@@ -1,15 +1,17 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Home } from './home/Home';
-// import { CollectionProvider } from './collections/CollectionProvider'
-// import { CollectionsList } from './collections/CollectionsList'
 import Rooms from './rooms/Rooms'
 import NewRoom from './rooms/NewRoom'
 import EditRoom from './rooms/EditRoom'
 import Collections from './collections/Collections'
 import EditCollection from './collections/EditCollection'
 import NewCollection from './collections/NewCollection'
+import SingleCollection from './collections/SingleCollection'
 import UserDetails from './pieceUsers/UserDetails'
+import EditItem from './items/EditItem'
+import NewItem from './items/NewItem'
+import ItemsByRoom from './rooms/RoomItems'
 
 export const ApplicationViews = () => {
   return <>
@@ -88,5 +90,44 @@ export const ApplicationViews = () => {
             }
         }} />
 
+        <Route path="/viewCollection/:collectionId" render={() => {
+            if (localStorage.getItem("token")) {
+                return <>
+                    <SingleCollection />
+                    </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+        <Route path="/editItem/:itemId" render={() => {
+            if (localStorage.getItem("token")) {
+                return <>
+                    <EditItem />
+                    </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+        <Route path="/newItem" render={() => {
+            if (localStorage.getItem("token")) {
+                return <>
+                    <NewItem />
+                    </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+        <Route path="/roomItems/:roomId" render={() => {
+            if (localStorage.getItem("token")) {
+                return <>
+                    <ItemsByRoom />
+                    </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
         </>;
 };
