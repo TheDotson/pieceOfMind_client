@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 class EditItem extends React.Component {
   state = {
     name: '',
-    image: '',
     location: 0,
     price: '',
     rooms: []
@@ -36,18 +35,13 @@ class EditItem extends React.Component {
         )
     .then(res => res.json())
     .then(res => {
-      this.setState({ name: res.name, image: res.image, location: res.location.id, price: res.price })
+      this.setState({ name: res.name, location: res.location.id, price: res.price })
     })
   }
 
   changeNameEvent = (e) => {
     e.preventDefault();
     this.setState({ name: e.target.value });
-  }
-
-  changeImageEvent = (e) => {
-    e.preventDefault();
-    this.setState({ image: e.target.value });
   }
 
   changeLocationEvent = (e) => {
@@ -89,25 +83,21 @@ class EditItem extends React.Component {
   }
 
   render() {
-    const { name, image, price, location, rooms } = this.state;
+    const { name, price, location, rooms } = this.state;
     return (
       <div className="form-wrapper">
       <h1 className="text-center mt-3">Edit Item</h1>
       <form>
         <div className="form-group">
-          <label htmlFor="name">Name Change</label>
+          <label htmlFor="name">Name</label>
           <input type="text" className="form-control" id="name" value={name} onChange={this.changeNameEvent} />
         </div>
         <div className="form-group">
-          <label htmlFor="image">Image Change</label>
-          <input type="text" className="form-control" id="image" value={image} onChange={this.changeImageEvent} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="price">Price Change</label>
+          <label htmlFor="price">Price</label>
           <input type="text" className="form-control" id="price" value={price} onChange={this.changePriceEvent} />
         </div>
         <div className="form-group">
-          <label htmlFor="location">Location Change</label>
+          <label htmlFor="location">Location</label>
             <select value={location} onChange={this.changeLocationEvent}>              
               {rooms.map(room => <option key={room.id} value={room.id}>{room.name}</option>)}
             </select>
