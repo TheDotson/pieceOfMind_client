@@ -64,12 +64,14 @@ class NewItem extends React.Component {
     createItem = (e) => {
         e.preventDefault();
         const { name, price, location, image } = this.state
+        const { collectionId } = this.props.match.params
 
         const newItem = {
           name: name,
           price: price,
           location: location,
-          image: image
+          image: image,
+          collectionId: collectionId
         }
         fetch("http://localhost:8000/items", {
             method: "POST",

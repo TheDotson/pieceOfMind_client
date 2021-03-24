@@ -5,7 +5,7 @@ class NewCollection extends React.Component {
     state = {
         name: '',
         user: '',
-        items: '',
+        items: [],
     }
 
     changeNameEvent = (e) => {
@@ -15,13 +15,13 @@ class NewCollection extends React.Component {
 
     createCollection = (e) => {
         e.preventDefault();
-        const { name } = this.state
+        const { name, items } = this.state
         const user = localStorage.getItem('user_id')
 
         const newCollection = {
             name: name,
             user: user,
-            items: [1]
+            items: items
         }
         fetch("http://127.0.0.1:8000/collections", {
             method: "POST",
