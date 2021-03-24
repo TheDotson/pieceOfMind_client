@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 class NewItem extends React.Component {
+  fileInput = React.createRef();
     state = {
         name: '',
         location: '',
@@ -45,11 +46,6 @@ class NewItem extends React.Component {
         e.preventDefault();
         this.setState({ name: e.target.value });
     }
-
-    createImageEvent = (e) => {
-      e.preventDefault();
-      this.setState({ image: e.target.value });
-    }
   
     createLocationEvent = (e) => {
       e.preventDefault();
@@ -63,29 +59,44 @@ class NewItem extends React.Component {
   
     createItem = (e) => {
         e.preventDefault();
-        const { name, price, location, image } = this.state
+        const { name, price, location } = this.state
         const { collectionId } = this.props.match.params
 
-        const newItem = {
-          name: name,
-          price: price,
-          location: location,
-          image: image,
-          collectionId: collectionId
-        }
-        fetch("http://localhost:8000/items", {
-            method: "POST",
-            headers: {
-                "Authorization": `Token ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(
-                newItem
-            )
-        })
-        .then(res => res.json())
-        .then(res => {
-            this.props.history.push('/collections')
+        const formdata = new FormData();
+        formdata.append("image_file", this.fileInput.current.files[0]);
+
+        var requestOptions = {
+          method: 'POST',
+          headers: {
+            "Authorization": `Token ${localStorage.getItem("token")}`,
+        },
+          body: formdata,
+          redirect: 'follow'
+        };
+        return fetch("http://127.0.0.1:8000/images", requestOptions
+        ).then(res => res.json())
+        .then( res => {
+          const newItem = {
+            name: name,
+            price: price,
+            location: location,
+            image: res.image_file,
+            collectionId: collectionId
+          }
+          fetch("http://127.0.0.1:8000/items", {
+              method: "POST",
+              headers: {
+                  "Authorization": `Token ${localStorage.getItem("token")}`,
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(
+                  newItem
+              )
+          })
+          .then(res => res.json())
+          .then(res => {
+              this.props.history.push(`/viewCollection/${collectionId}`)
+          })
         })
     }
 
@@ -102,7 +113,7 @@ class NewItem extends React.Component {
                   </div>
                   <div className="form-group">
                     <label htmlFor="image">Image</label>
-                    <input type="text" className="form-control" id="image" placeholder="Image URL" onChange={this.createImageEvent} />
+                    <input type="file" className="form-control" id="image" name="image" ref={this.fileInput} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="price">Price</label>
@@ -111,7 +122,7 @@ class NewItem extends React.Component {
                   <div className="form-group">
                     <label htmlFor="location">Location</label>
                     <select onChange={this.createLocationEvent}>              
-                      {rooms.map(room => <option key={room.id} value={room.id}>{room.name}</option>)}
+                      {rooms.map(room => <option key={room.id} value={room.id} >{room.name}</option>)}
                     </select>
                   </div>
                   <button className="btn-success" onClick={this.createItem}>Create Item</button>
