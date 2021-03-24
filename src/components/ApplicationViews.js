@@ -110,7 +110,7 @@ export const ApplicationViews = () => {
             }
         }} />
 
-        <Route path="/newItem" render={() => {
+        <Route path="/newItem/:collectionId" render={() => {
             if (localStorage.getItem("token")) {
                 return <>
                     <NewItem />

@@ -59,7 +59,7 @@ class SingleCollection extends React.Component {
 
   render() {
     const { collection } = this.state;
-    const newItem = `/newItem`
+    const newItem = `/newItem/${collection.id}`
     const item = collection && collection.items ? collection.items.map ((item) => <Item key={item.id} item={item} collection={collection}  />): ''
     return (
       <>
