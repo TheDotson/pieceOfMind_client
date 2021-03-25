@@ -95,12 +95,18 @@ class EditItem extends React.Component {
           <input type="text" className="form-control" id="name" value={name} onChange={this.changeNameEvent} />
         </div>
         <div className="form-group">
-          <label htmlFor="price">Price</label>
+        <label htmlFor="price">Price</label>
+        <div className="input-group">
+          <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+          <span class="input-group-text">0.00</span>
+          </div>
           <input type="text" className="form-control" id="price" value={price} onChange={this.changePriceEvent} />
+        </div>
         </div>
         <div className="form-group">
           <label htmlFor="location">Location</label>
-            <br/><select value={location} onChange={this.changeLocationEvent}>              
+            <br/><select class="custom-select custom-select-lg" ovalue={location} onChange={this.changeLocationEvent}>              
               {rooms.map(room => <option key={room.id} value={room.id}>{room.name}</option>)}
             </select>
         </div>

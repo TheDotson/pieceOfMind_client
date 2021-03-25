@@ -103,12 +103,19 @@ class NewItem extends React.Component {
                   </div>
                   <div className="form-group">
                     <label htmlFor="price">Price</label>
+                    <div className="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                        <span class="input-group-text">0.00</span>
+                    </div>
                     <input type="text" className="form-control" id="price" placeholder="Item Price" onChange={this.createPriceEvent} />
+                  </div>
                   </div>
                   <div className="form-group">
                     <label htmlFor="location">Location</label>
-                    <br/><select onChange={this.createLocationEvent}>              
-                      {rooms.map(room => <option key={room.id} value={room.id} >{room.name}</option>)}
+                    <br/><select class="custom-select custom-select-lg" onChange={this.createLocationEvent}>
+                    <option selected>Choose a Room</option>              
+                      {rooms.map(room => <option key={room.id} value={room.id}>{room.name}</option>)}
                     </select>
                   </div>
                   <button className="btn btn-success submit" onClick={this.createItem}>Create Item</button>
