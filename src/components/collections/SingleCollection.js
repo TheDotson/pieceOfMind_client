@@ -7,10 +7,12 @@ import Item from '../items/Item'
 class SingleCollection extends React.Component {
   state = {
     collection: {},
+    rooms: []
   }
 
   componentDidMount() {
     this.getCollectionById()
+    this.getRoomsByUser();
   }
 
   getCollectionById = () => {
@@ -25,6 +27,19 @@ class SingleCollection extends React.Component {
       this.setState({ collection: res })
     })
   }
+
+  getRoomsByUser = () => {
+    const user = localStorage.getItem('user_id')
+    return fetch(`http://localhost:8000/rooms?user=${user}`, {
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("token")}`
+        }
+    })
+    .then(res => res.json())
+    .then(res => {
+        this.setState({ rooms: res.results })
+    })
+}
 
   deleteCollection = () => {
     const { collectionId } = this.props.match.params;
@@ -58,27 +73,24 @@ class SingleCollection extends React.Component {
   };
 
   render() {
-    const { collection } = this.state;
+    const { collection, rooms } = this.state;
     const newItem = `/newItem/${collection.id}`
+    const newRoom = `/newRoom`
     const item = collection && collection.items ? collection.items.map ((item) => <Item key={item.id} item={item} collection={collection}  />): ''
     return (
-      <>
-      <div className="container d-flex">
-        <div className="collection d-flex flex-column col-10">
-          <div className="collection-header">
-            <h2 className="name text-center">{collection.name}</h2>
-          </div>
-          <div className="collection-options d-flex justify-content-between">
-            <span><i className="fas fa-trash-alt mr-3" onClick={this.deleteCollectionEvent}></i>
-            <Link to={newItem}><i className="fas fa-plus-square"></i> Add Item</Link>        
-            </span>
-          </div>
-          <div className="collection">
+      <div className="text-center">
+          <h1 className="name text-center mt-3 headline">{collection.name}</h1>
+            {
+                rooms.length > 0 ? (
+                  <Link to={newItem}><i className="fas fa-plus-square mb-3"></i> Add Item</Link>        
+                ) : (
+                  <Link to={newRoom}><i className="fas fa-plus-square mb-3"></i> New Room</Link>
+                )
+              }
+          <div className="collection-container">
             {item}
           </div>
-        </div>
       </div>
-    </>
     )
   }
 }

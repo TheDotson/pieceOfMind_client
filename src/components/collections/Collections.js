@@ -7,8 +7,9 @@ class Collections extends React.Component {
     collections: [],
   }
 
-  getAllCollections = () => {
-    return fetch("http://localhost:8000/collections", {   
+  getCollectionByUser = () => {
+    const user = localStorage.getItem('user_id')
+    return fetch(`http://localhost:8000/collections?user=${user}`, {   
     headers: {
       "Authorization": `Token ${localStorage.getItem("token")}`}
     }
@@ -20,18 +21,18 @@ class Collections extends React.Component {
   }
 
   componentDidMount() {
-    this.getAllCollections();
+    this.getCollectionByUser();
   }
 
   render() {
     const { collections } = this.state;
     const newCollection = `/newCollection`
-    const collection = collections.map((collection) => <Collection key={collection.id} collection={collection} getAllCollections={this.getAllCollections} />);
+    const collection = collections.map((collection) => <Collection key={collection.id} collection={collection} getCollectionByUser={this.getCollectionByUser} />);
     return (
-      <div>
-        <h1>My Collections</h1>
-        <div className="card-columns">
-          <Link to={newCollection}><i className="fas fa-plus-square"></i> New Collection</Link>
+      <div className="text-center">
+        <h1 className="text-center mt-3 headline">My Collections</h1>
+        <Link to={newCollection}><i className="fas fa-plus-square mb-3"></i> New Collection</Link>
+        <div className="collection-container">
           {collection}
         </div>
       </div>

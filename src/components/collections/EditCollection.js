@@ -58,12 +58,12 @@ class EditCollection extends React.Component {
     return (
       <div className="form-wrapper">
       <h1 className="text-center mt-3">Edit Collection</h1>
-      <form>
+      <form className="col-4 realForm form-style" autoComplete="off">
         <div className="form-group">
-          <label htmlFor="title">Collection Name Change</label>
+          <label className="mt-3" htmlFor="title">Collection Name Change</label>
           <input type="text" className="form-control" id="name" value={name} onChange={this.changeNameEvent} />
         </div>
-      <br/><button className="btn-warning" onClick={this.editCollection}>Save</button>
+      <button className="btn btn-success submit" onClick={this.editCollection}>Save</button>
     </form>
   </div>
     )

@@ -1,0 +1,19 @@
+.homeImg {
+    width: 50%;
+    height: 400px;
+    object-fit: fill;
+}
+
+.homeDetail {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+.homeEmphasis {
+  text-decoration: underline;
+  margin-top: 1rem;
+}
+
+.aboutUs-container {
+  background: linear-gradient(to right bottom, $cream, $gray);
+}

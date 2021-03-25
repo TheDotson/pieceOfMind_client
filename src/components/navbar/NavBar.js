@@ -6,7 +6,7 @@ export const NavBar = props => {
 
     return (
         <Navbar  className="Navbar" expand="lg">
-            <Navbar.Brand className="navbar-brand" href="/">Piece of Mind</Navbar.Brand>
+            <Navbar.Brand className="navbar-brand" href="/home">Piece of Mind</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">

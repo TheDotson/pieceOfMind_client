@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 class NewRoom extends React.Component {
     state = {
         name: '',
+        user: ''
     }
 
     changeNameEvent = (e) => {
@@ -14,9 +15,11 @@ class NewRoom extends React.Component {
     createRoom = (e) => {
         e.preventDefault();
         const { name } = this.state
+        const user = localStorage.getItem('user_id')
 
         const newRoom = {
-            name: name
+            name: name,
+            user: user
         }
         fetch("http://127.0.0.1:8000/rooms", {
             method: "POST",
@@ -37,11 +40,10 @@ class NewRoom extends React.Component {
     render() {
         return(
             <div className="newRoomForm">
-                <h2 className="text-center">Create New Room</h2>
-                <div className="newFormContainer">
-                    <form className="col-4 realForm">
+                <h2 className="text-center mt-3">Create New Room</h2>
+                    <form className="col-4 realForm form-style" autoComplete="off">
                         <div className="form-group">
-                            <label htmlFor="name">Room Name</label>
+                            <label className="mt-3" htmlFor="name">Room Name</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -50,9 +52,8 @@ class NewRoom extends React.Component {
                                 onChange={this.changeNameEvent}
                             />
                         </div>
-                        <button className="btn-success" onClick={this.createRoom}>Create Room</button>
+                        <button className="btn btn-success submit" onClick={this.createRoom}>Create Room</button>
                     </form>
-                </div>
             </div>
         )
     }

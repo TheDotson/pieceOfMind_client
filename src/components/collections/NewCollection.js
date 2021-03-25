@@ -42,11 +42,10 @@ class NewCollection extends React.Component {
     render() {
         return(
             <div className="newCollectionForm">
-                <h2 className="text-center">Create New Collection</h2>
-                <div className="newFormContainer">
-                    <form className="col-4 realForm">
+                <h2 className="text-center mt-3">Create New Collection</h2>
+                    <form className="col-4 realForm form-style" autoComplete="off">
                         <div className="form-group">
-                            <label htmlFor="name">Collection Name</label>
+                            <label className="mt-3" htmlFor="name">Collection Name</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -55,9 +54,8 @@ class NewCollection extends React.Component {
                                 onChange={this.changeNameEvent}
                             />
                         </div>
-                        <button className="btn-success" onClick={this.createCollection}>Create Collection</button>
+                        <button className="btn btn-success submit" onClick={this.createCollection}>Create Collection</button>
                     </form>
-                </div>
             </div>
         )
     }

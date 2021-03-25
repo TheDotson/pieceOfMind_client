@@ -11,11 +11,12 @@ class EditItem extends React.Component {
 
   componentDidMount() {
     this.getItemById();
-    this.getAllRooms();
+    this.getRoomsByUser();
   }
 
-  getAllRooms = () => {
-    return fetch("http://localhost:8000/rooms", {
+  getRoomsByUser = () => {
+    const user = localStorage.getItem('user_id')
+    return fetch(`http://localhost:8000/rooms?user=${user}`, {
       headers:{
           "Authorization": `Token ${localStorage.getItem("token")}`
       }
@@ -25,6 +26,7 @@ class EditItem extends React.Component {
       this.setState({ rooms: res.results })
     })
   }
+
 
   getItemById = () => {
     const { itemId } = this.props.match.params;
@@ -87,9 +89,9 @@ class EditItem extends React.Component {
     return (
       <div className="form-wrapper">
       <h1 className="text-center mt-3">Edit Item</h1>
-      <form>
+      <form className="col-4 realForm form-style" autoComplete="off">
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label className="mt-3" htmlFor="name">Name</label>
           <input type="text" className="form-control" id="name" value={name} onChange={this.changeNameEvent} />
         </div>
         <div className="form-group">
@@ -98,11 +100,11 @@ class EditItem extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="location">Location</label>
-            <select value={location} onChange={this.changeLocationEvent}>              
+            <br/><select value={location} onChange={this.changeLocationEvent}>              
               {rooms.map(room => <option key={room.id} value={room.id}>{room.name}</option>)}
             </select>
         </div>
-      <br/><button className="btn-warning" onClick={this.editItem}>Save</button>
+      <button className="btn btn-success submit" onClick={this.editItem}>Save</button>
     </form>
   </div>
     )

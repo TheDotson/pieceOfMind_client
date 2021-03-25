@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { Home } from './home/Home';
+import Home from './home/Home'
 import Rooms from './rooms/Rooms'
 import NewRoom from './rooms/NewRoom'
 import EditRoom from './rooms/EditRoom'
@@ -15,10 +15,17 @@ import ItemsByRoom from './rooms/RoomItems'
 
 export const ApplicationViews = () => {
   return <>
-        <Route exact path='/'>
-          <Redirect to='/home' />
-        </Route>
-        <Route exact path='/home' render={props => <Home {...props} />} />
+
+        <Route path="/home" render={() => {
+            if (localStorage.getItem("token")) {
+                return <>
+                    <Home />
+                    </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
         
         <Route path="/rooms" render={() => {
             if (localStorage.getItem("token")) {

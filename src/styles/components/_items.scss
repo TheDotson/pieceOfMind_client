@@ -2,7 +2,7 @@
   width: 18rem;
   margin: 5px;
   box-shadow: 3px 3px black;
-  background-color: #F6D342;
+  background: linear-gradient(to right bottom, $cream, $gray);
   color: black;
   img {
     width: 100%;
@@ -13,7 +13,7 @@
 
 .card-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .card-title {
