@@ -1,14 +1,17 @@
 import React from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { Jumbotron, Button } from 'reactstrap';
 
 class UserDetails extends React.Component {
   
   state = {
     pieceUser: {},
+    collections: {}
   }
 
   componentDidMount() {
     this.getPieceUser()
+    this.getCollectionByUser()
   }
   
   getPieceUser = () => {
@@ -22,21 +25,36 @@ class UserDetails extends React.Component {
       this.setState({ pieceUser: res })
     })
   }
+
+  getCollectionByUser = () => {
+    const user = localStorage.getItem('user_id')
+    return fetch(`http://localhost:8000/collections?user=${user}`, {   
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("token")}`}
+    }
+      )
+    .then(res => res.json())
+    .then(res => {
+      this.setState({ collections: res.results })
+    })
+  }
+
  
   render() {
     const { pieceUser } = this.state;
     const { user } = this.state.pieceUser
     return (
-      <div className="d-flex row">
-        <div className="ml-auto">
-        {/* <div className="profileImgDiv"><img className="profileImg" src={profile_image_url} /></div> */}
-        <div className="profileName">
-          <h3>Name: {user && user.first_name} {user && user.last_name} </h3></div>
-        </div>
-        <div className="profileText m-5">
-        <div className="profileEmail"><h3>Email: {user && user.email}</h3></div>
-        <div className="profileBio"><h3>Bio: {pieceUser && pieceUser.bio}</h3></div>        {/* <Link to={userItems}><div classname="itemCount"><h3>Number of Items: {items.count}</h3></div></Link> */}
-        </div>
+      <div>
+        <Jumbotron className="mt-3 ml-3 mr-3 bio-container">
+          {/* <div className="profileImgDiv"><img className="profileImg" src={profile_image_url} /></div> */}
+          <h3 >{user && user.first_name} {user && user.last_name} </h3>
+          <hr className="my-2" />
+          <p >Bio: {pieceUser && pieceUser.bio}</p>
+          <p>Email: {user && user.email}</p>
+          <p className="lead">
+          <Button color="btn btn-primary">Download Collection Info</Button>
+          </p>
+        </Jumbotron>
       </div>
     )
   }

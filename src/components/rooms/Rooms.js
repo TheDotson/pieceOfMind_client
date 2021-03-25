@@ -8,11 +8,12 @@ class Rooms extends React.Component {
     }
 
     componentDidMount() {
-        this.getAllRooms();
+        this.getRoomsByUser();
     }
 
-    getAllRooms = () => {
-        return fetch("http://localhost:8000/rooms", {
+    getRoomsByUser = () => {
+        const user = localStorage.getItem('user_id')
+        return fetch(`http://localhost:8000/rooms?user=${user}`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("token")}`
             }
@@ -23,14 +24,15 @@ class Rooms extends React.Component {
         })
     }
 
+
     render() {
         const { rooms } = this.state;
         const newRoom = `/newRoom`
-        const room = rooms.map ((room) => <Room key={room.id} getAllRooms={this.getAllRooms} room={room}/>)
+        const room = rooms.map ((room) => <Room key={room.id} getRoomsByUser={this.getRoomsByUser} room={room}/>)
         return(
             <div className="text-center">
-                <h1 className="text-center mt-3">Rooms</h1>
-                <Link to={newRoom}><i className="fas fa-plus-square"></i> New Room</Link>
+                <h1 className="text-center mt-3 headline">Rooms</h1>
+                <Link to={newRoom}><i className="fas fa-plus-square mb-3"></i> New Room</Link>
                 <div className="room-container">
                     {room}
                 </div>

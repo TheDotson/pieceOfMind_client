@@ -5,14 +5,14 @@ import { confirmAlert } from 'react-confirm-alert'
 class Collection extends React.Component {
   
   deleteCollection = () => {
-    const { collection, getAllCollections } =this.props
+    const { collection, getCollectionByUser } =this.props
     return fetch(`http://localhost:8000/collections/${collection.id}`, {
       method: "DELETE",
         headers: {
           "Authorization": `Token ${localStorage.getItem("token")}`}
     }).then(() => {
       this.props.history.push('/collections')
-      getAllCollections()
+      getCollectionByUser()
     })
   }
 
@@ -44,12 +44,12 @@ class Collection extends React.Component {
       <div className="card text-center collection-card">
         <div className="card-header"><h5>{collection.name}</h5></div>
         <div className="card-body">
-          <div className="btn-group" role="group">
-            <Link to={collectionDetails}><button className="btn btn-secondary"><i className="far fa-eye"></i></button></Link>
+          <div className="card-footer">
+            <Link to={collectionDetails}><button className="btn btn-primary"><i className="far fa-eye"></i></button></Link>
             <Link to={editCollection}><button className="btn btn-warning"><i className="far fa-edit"></i></button></Link>
+            <button className="btn btn-danger" onClick={this.deleteCollectionEvent}><i className="fas fa-trash-alt"></i></button>
           </div>
         </div>
-        <div className="card-footer"><button className="btn btn-danger" onClick={this.deleteCollectionEvent}>Delete Collection</button></div>
       </div>
     );
 }

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 class EditRoom extends React.Component {
   state = {
     name: '',
+    user: ''
   }
 
   componentDidMount() {
@@ -19,7 +20,7 @@ class EditRoom extends React.Component {
     })
     .then (res => res.json())
     .then(res => {
-      this.setState({ name: res.name })
+      this.setState({ name: res.name, user: res.user })
     })
   }
 
@@ -30,11 +31,12 @@ class EditRoom extends React.Component {
 
   editRoom = (e) => {
     e.preventDefault();
-    const { name } = this.state
+    const { name, user } = this.state
     const { roomId } = this.props.match.params;
 
     const editedRoom = {
       name: name,
+      user: user
     }
 
     fetch(`http://localhost:8000/rooms/${roomId}`, {
@@ -57,11 +59,10 @@ class EditRoom extends React.Component {
     const { name } = this.state
     return (
       <div className="editRoomForm">
-        <h2 className="text-center">Edit Room</h2>
-        <div className="editFormContainer">
-          <form className="col-4">
+        <h2 className="text-center mt-3">Edit Room</h2>
+          <form className="col-4 form-style" autoComplete="off">
             <div className="form-group">
-              <label htmlFor="name">Room Name Change</label>
+              <label className="mt-3" htmlFor="name">Name Change</label>
               <input
               type="text"
               className="form-control"
@@ -71,9 +72,8 @@ class EditRoom extends React.Component {
               onChange={this.changeNameEvent}
               />
             </div>
-            <button className="btn-warning" onClick={this.editRoom}>Save</button>
+            <button className="btn btn-success submit" onClick={this.editRoom}>Save</button>
           </form>
-        </div>
       </div>
     )
   }

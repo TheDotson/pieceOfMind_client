@@ -13,12 +13,12 @@ class NewItem extends React.Component {
     }
 
     componentDidMount() {
-      this.getAllRooms();
-      this.getAllCollections();
+      this.getRoomByUser();
     }
 
-    getAllRooms = () => {
-      return fetch("http://localhost:8000/rooms", {
+    getRoomByUser = () => {
+      const user = localStorage.getItem('user_id')
+      return fetch(`http://localhost:8000/rooms?user=${user}`, {
         headers:{
             "Authorization": `Token ${localStorage.getItem("token")}`
         }
@@ -28,19 +28,6 @@ class NewItem extends React.Component {
         this.setState({ rooms: res.results })
       })
     }
-
-    getAllCollections = () => {
-      return fetch("http://localhost:8000/collections", {   
-      headers: {
-        "Authorization": `Token ${localStorage.getItem("token")}`}
-      }
-        )
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ collections: res.results })
-      })
-    }
-  
   
     createNameEvent = (e) => {
         e.preventDefault();
@@ -104,11 +91,10 @@ class NewItem extends React.Component {
       const { rooms } = this.state
         return(
             <div className="newItemForm">
-              <h2 className="text-center">Create New Item</h2>
-              <div className="newFormContainer">
-                <form className="col-4 realForm">
+              <h2 className="text-center mt-3">Create New Item</h2>
+                <form className="col-4 realForm form-style" autoComplete="off">
                   <div className="form-group">
-                    <label htmlFor="name">Name</label>
+                    <label className="mt-3" htmlFor="name">Name</label>
                     <input type="text" className="form-control" id="name" placeholder="Item Name" onChange={this.createNameEvent} />
                   </div>
                   <div className="form-group">
@@ -121,13 +107,12 @@ class NewItem extends React.Component {
                   </div>
                   <div className="form-group">
                     <label htmlFor="location">Location</label>
-                    <select onChange={this.createLocationEvent}>              
+                    <br/><select onChange={this.createLocationEvent}>              
                       {rooms.map(room => <option key={room.id} value={room.id} >{room.name}</option>)}
                     </select>
                   </div>
-                  <button className="btn-success" onClick={this.createItem}>Create Item</button>
+                  <button className="btn btn-success submit" onClick={this.createItem}>Create Item</button>
                 </form>
-              </div>
             </div>
         )
     }

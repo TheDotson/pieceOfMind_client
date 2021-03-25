@@ -43,9 +43,10 @@ class Item extends React.Component {
       <div className="card">
         <img className="card-img-top" src={item.image} alt={item.name} />
         <h5 className="card-title">{item.name}</h5>
+        <h5>Price: ${item.price}</h5>
         <div className="card-footer">
-          <Link to={editItem}><button className="btn btn-warning">Edit Item</button></Link>
-          <button className="btn btn-danger" onClick={this.deleteItemEvent}>Delete Item</button>
+          <Link to={editItem}><button className="btn btn-warning"><i className="far fa-edit"></i></button></Link>
+          <button className="btn btn-danger" onClick={this.deleteItemEvent}><i className="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );

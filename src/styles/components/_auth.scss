@@ -26,7 +26,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px !important;
-  background-color: $cream;
+  background: linear-gradient(to right bottom, $cream, $gray);
   box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.37);
   border-radius: 5px;
 }
