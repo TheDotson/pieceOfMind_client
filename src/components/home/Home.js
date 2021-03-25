@@ -11,8 +11,8 @@ class Home extends React.Component {
           <h1 className="headline">About Us</h1>
           <div><img className="homeImg" src="https://bit.ly/3vVy6JN" alt='disaster'/></div>
           <div className="homeDetail">
-          <p>Having lived through the Middle Tennessee tornados of March 2020, I can tell you that one of the last things you think about after having survived a disaster is "Where was that one thing, and how much was it?".
-          <br/>One of the many tasks one must handle after the storm passes is conducting an assessment of what remains, what was lost; a task that can be emotionally draining in such a time.
+          <p>Having lived through the Middle Tennessee tornado event of March 2020, I can tell you that one of the last things you think about after having survived a disaster is <br/>"Where was that one thing, and how much was it? Was this really in the den, or was it in the living room?".
+          <br/>One of the many tasks one must handle after the storm passes is conducting an assessment of what remains and what was lost; a task that can be emotionally draining in such a time.
           </p>
           <div><p className="homeEmphasis">That is where Piece of Mind comes in.</p></div>
           <p>
