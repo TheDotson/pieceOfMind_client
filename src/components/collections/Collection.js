@@ -23,8 +23,8 @@ class Collection extends React.Component {
           <div className="custom-ui">
             <h1>Delete?</h1>
             <p>Are you sure you want to proceed?</p>
-            <button className="mr-3 dialog-btn" onClick={onClose}><h4>No</h4></button>
-            <button className="dialog-btn"
+            <button className="mr-3 dialog-btn btn btn-secondary" onClick={onClose}><h4>No</h4></button>
+            <button className="dialog-btn btn btn-danger"
               onClick={() => {
                 this.deleteCollection();
                 onClose();}}>

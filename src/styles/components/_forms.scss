@@ -8,3 +8,11 @@
 .submit {
   margin-bottom: 1rem;
 }
+
+.custom-ui {
+  text-align: center;
+  width: 500px;
+  padding: 40px;
+  background: linear-gradient(to right bottom, $cream, $gray);
+  box-shadow: 0 1rem 2rem rgba(1,1,1, .1);
+}
